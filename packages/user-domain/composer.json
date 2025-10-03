@@ -1,0 +1,11 @@
+{
+  "name": "chords/user-domain",
+  "require": {
+    "php": "^8.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Chords\\User\\Domain\\": "src"
+    }
+  }
+}

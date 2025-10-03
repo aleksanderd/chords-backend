@@ -1,0 +1,13 @@
+{
+  "name": "chords/user-symfony",
+  "require": {
+    "php": "^8.4",
+    "symfony/dependency-injection": "^7.3.4",
+    "symfony/http-kernel": "^7.3.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Chords\\User\\Symfony\\": "src"
+    }
+  }
+}
