@@ -1,20 +1,116 @@
 {
-  "require": {
-    "php": "^8.4",
-    "symfony/dependency-injection": "^7.3.4",
-    "symfony/http-kernel": "^7.3.4"
-  },
-  "require-dev": {
-    "symplify/monorepo-builder": "^12.2"
-  },
-  "replace": {
-    "chords/user-domain": "self.version",
-    "chords/user-symfony": "self.version"
-  },
-  "autoload": {
-    "psr-4": {
-      "Chords\\User\\Domain\\": "packages/user-domain/src",
-      "Chords\\User\\Symfony\\": "packages/user-symfony/src"
+    "require": {
+        "chords/user-symfony": "@dev",
+        "doctrine/dbal": "^3.10.2",
+        "doctrine/doctrine-bundle": "^2.16.2",
+        "doctrine/doctrine-migrations-bundle": "^3.4.2",
+        "doctrine/orm": "^3.5.2",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "nelmio/cors-bundle": "^2.5",
+        "php": "^8.4",
+        "phpdocumentor/reflection-docblock": "^5.6.3",
+        "phpstan/phpdoc-parser": "^2.3",
+        "symfony/asset": "7.3.*",
+        "symfony/console": "7.3.*",
+        "symfony/dependency-injection": "7.3.4",
+        "symfony/dotenv": "7.3.*",
+        "symfony/expression-language": "7.3.*",
+        "symfony/flex": "^2.8.2",
+        "symfony/framework-bundle": "7.3.*",
+        "symfony/http-kernel": "7.3.4",
+        "symfony/property-access": "7.3.*",
+        "symfony/property-info": "7.3.*",
+        "symfony/runtime": "7.3.*",
+        "symfony/security-bundle": "7.3.*",
+        "symfony/serializer": "7.3.*",
+        "symfony/twig-bundle": "7.3.*",
+        "symfony/uid": "^7.3.1",
+        "symfony/validator": "7.3.*",
+        "symfony/yaml": "7.3.*"
+    },
+    "require-dev": {
+        "deptrac/deptrac": "^4.2",
+        "friendsofphp/php-cs-fixer": "^3.88.2",
+        "php-cs-fixer/shim": "^3.9.3",
+        "phpstan/phpstan": "^2.1",
+        "symplify/monorepo-builder": "^12.2"
+    },
+    "replace": {
+        "chords/core-domain": "self.version",
+        "chords/core-symfony": "self.version",
+        "chords/user-domain": "self.version",
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*",
+        "symfony/polyfill-php82": "*"
+    },
+    "repositories": [
+        {
+            "options": {
+                "symlink": true
+            },
+            "type": "path",
+            "url": "packages/*"
+        },
+        {
+            "options": {
+                "symlink": true
+            },
+            "type": "path",
+            "url": "packages/core-domain"
+        },
+        {
+            "options": {
+                "symlink": true
+            },
+            "type": "path",
+            "url": "packages/core-symfony"
+        },
+        {
+            "options": {
+                "symlink": true
+            },
+            "type": "path",
+            "url": "packages/user-domain"
+        },
+        {
+            "options": {
+                "symlink": true
+            },
+            "type": "path",
+            "url": "packages/user-symfony"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "App\\": "apps/demo/src/",
+            "Chords\\Core\\Domain\\": "packages/core-domain/src",
+            "Chords\\Core\\Symfony\\": "packages/core-symfony/src",
+            "Chords\\User\\Domain\\": "packages/user-domain/src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "apps/demo/tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": false,
+            "symfony/runtime": false
+        }
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "7.3.*"
+        }
     }
-  }
 }

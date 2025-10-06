@@ -1,16 +1,15 @@
 {
-    "name": "chords/user-symfony",
+    "name": "chords/core-symfony",
     "require": {
         "chords/core-domain": "@dev",
-        "chords/core-symfony": "@dev",
-        "chords/user-domain": "@dev",
+        "symfony/uid": "^7.3.1",
         "symfony/http-kernel": "7.3.4",
         "symfony/dependency-injection": "7.3.4",
         "php": "^8.4"
     },
     "autoload": {
         "psr-4": {
-            "Chords\\User\\Symfony\\": "src"
+            "Chords\\Core\\Symfony\\": "src"
         }
     }
 }
