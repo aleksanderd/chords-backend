@@ -6,9 +6,9 @@ namespace Chords\User\Domain\Service;
 
 use Chords\Core\Domain\Model\OIdInterface;
 use Chords\User\Domain\Exception\UserNotFoundException;
-use Chords\User\Domain\Infrastructure\Repository\UserReadRepositoryInteface;
-use Chords\User\Domain\Infrastructure\Repository\UserWriteRepositoryInteface;
 use Chords\User\Domain\Model\UserReadInterface;
+use Chords\User\Domain\Repository\UserReadRepositoryInteface;
+use Chords\User\Domain\Repository\UserWriteRepositoryInteface;
 
 class UserService
 {

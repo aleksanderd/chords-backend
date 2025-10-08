@@ -6,20 +6,39 @@ deptrac:
     layers:
         - name: Domain
           collectors:
-              - type: classLike
-                value: .*Domain.*
+              - type: bool
+                must:
+                    - type: classLike
+                      value: .*Domain.*
+                must_not:
+                    - type: classLike
+                      value: .*Bundle
+
+        - name: Repository
+          collectors:
+              - type: bool
+                must:
+                    - type: classLike
+                      value: .*Repository.*
+                must_not:
+                    - type: classLike
+                      value: .*Domain\\Repository.*
+
+        - name: Service
+          collectors:
+              - type: bool
+                must:
+                    - type: classLike
+                      value: .*Service.*
+                must_not:
+                    - type: classLike
+                      value: .*Domain\\Service.*
+
         - name: Controller
           collectors:
               - type: classLike
                 value: .*Controller.*
-        - name: Repository
-          collectors:
-              - type: classLike
-                value: .*Repository.*
-        - name: Service
-          collectors:
-              - type: classLike
-                value: .*Service.*
+
     ruleset:
         Controller:
             - Service

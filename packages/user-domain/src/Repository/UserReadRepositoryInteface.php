@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chords\User\Domain\Infrastructure\Repository;
+namespace Chords\User\Domain\Repository;
 
 use Chords\Core\Domain\Model\OIdInterface;
 use Chords\User\Domain\Model\UserReadInterface;
