@@ -13,6 +13,20 @@ deptrac:
                 must_not:
                     - type: classLike
                       value: .*Bundle
+                    - type: classLike
+                      value: .*Domain\\Service.*
+                    - type: interface
+                      value: .*Domain\\Repository.*
+
+        - name: DomainService
+          collectors:
+              - type: classLike
+                value: .*Domain\\Service.*
+
+        - name: DomainRepository
+          collectors:
+              - type: interface
+                value: .*Domain\\Repository.*
 
         - name: Repository
           collectors:
@@ -24,26 +38,30 @@ deptrac:
                     - type: classLike
                       value: .*Domain\\Repository.*
 
-        - name: Service
-          collectors:
-              - type: bool
-                must:
-                    - type: classLike
-                      value: .*Service.*
-                must_not:
-                    - type: classLike
-                      value: .*Domain\\Service.*
-
-        - name: Controller
+        - name: InterfaceManager
           collectors:
               - type: classLike
-                value: .*Controller.*
+                value: .*Interface.*\\Controller.*\\Manager
+
+        - name: InterfaceController
+          collectors:
+              - type: classLike
+                value: .*Interface.*\\Controller.*\\Controller
 
     ruleset:
-        Controller:
-            - Service
-        Service:
-            - Repository
+        InterfaceController:
+            - InterfaceManager
+        InterfaceManager:
+            - Domain
+            - DomainService
         Repository:
             - Domain
+            - DomainRepository
+            - Repository
+        DomainRepository:
+            - Domain
+            - DomainRepository
+        DomainService:
+            - Domain
+            - DomainRepository
         Domain:

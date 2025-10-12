@@ -9,6 +9,7 @@ return [
     Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class => ['all' => true],
     Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle::class => ['all' => true],
     Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
-    Chords\User\Domain\UserDomainBundle::class => ['all' => true],
-    Chords\User\Symfony\UserSymfonyBundle::class => ['all' => true],
+    Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true, 'test' => true],
+    Chords\Core\CoreBundle::class => ['all' => true],
+    Chords\User\UserBundle::class => ['all' => true],
 ];

@@ -7,9 +7,8 @@ use Symplify\MonorepoBuilder\Config\MBConfig;
 return static function (MBConfig $config): void {
     $config->packageDirectories(array_map(fn ($dir) => __DIR__ . $dir, [
         '/apps/demo',
-        '/packages/core-domain',
-        '/packages/core-symfony',
-        '/packages/user-domain',
+        '/packages/core',
+        '/packages/user',
     ]));
 
     $config->dataToAppend([

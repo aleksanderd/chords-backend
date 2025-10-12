@@ -1,9 +1,0 @@
-services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-
-    Chords\User\Domain\:
-        resource: "../src/"
-        exclude:
-            - "../src/DependencyInjection/"

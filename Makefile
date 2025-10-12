@@ -19,7 +19,7 @@ cs-fix:
 phpstan:
 	${DOCKER_EXEC} vendor/bin/phpstan analyse --memory-limit=1G
 
-deptrack:
+deptrac:
 	${DOCKER_EXEC} vendor/bin/deptrac
 
-lint: cs-fix phpstan deptrack
+lint: cs-fix phpstan deptrac

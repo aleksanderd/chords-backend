@@ -15,13 +15,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 class HelloCommand extends Command
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    // public function __construct(private UserServiceInterface $userService)
+    // {
+    //     parent::__construct();
+    // }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        // $user = $this->userService->getByLogin(new Login('test'));
+
         $output->writeln('test... ');
 
         return Command::SUCCESS;

@@ -1,9 +1,8 @@
 {
     "require": {
-        "chords/user-symfony": "@dev",
-        "doctrine/dbal": "^3.10.2",
-        "doctrine/doctrine-bundle": "^2.16.2",
-        "doctrine/doctrine-migrations-bundle": "^3.4.2",
+        "doctrine/dbal": "^4.3.4",
+        "doctrine/doctrine-bundle": "^3.0.0",
+        "doctrine/doctrine-migrations-bundle": "^3.5.0",
         "doctrine/orm": "^3.5.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
@@ -27,19 +26,20 @@
         "symfony/twig-bundle": "7.3.*",
         "symfony/uid": "^7.3.1",
         "symfony/validator": "7.3.*",
-        "symfony/yaml": "7.3.*"
+        "symfony/yaml": "7.3.*",
+        "webmozart/assert": "^1.11.0"
     },
     "require-dev": {
         "deptrac/deptrac": "^4.2",
         "friendsofphp/php-cs-fixer": "^3.88.2",
         "php-cs-fixer/shim": "^3.9.3",
         "phpstan/phpstan": "^2.1",
+        "symfony/web-profiler-bundle": "^7.3",
         "symplify/monorepo-builder": "^12.2"
     },
     "replace": {
-        "chords/core-domain": "self.version",
-        "chords/core-symfony": "self.version",
-        "chords/user-domain": "self.version",
+        "chords/core": "self.version",
+        "chords/user": "self.version",
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
         "symfony/polyfill-php72": "*",
@@ -62,28 +62,14 @@
                 "symlink": true
             },
             "type": "path",
-            "url": "packages/core-domain"
+            "url": "packages/core"
         },
         {
             "options": {
                 "symlink": true
             },
             "type": "path",
-            "url": "packages/core-symfony"
-        },
-        {
-            "options": {
-                "symlink": true
-            },
-            "type": "path",
-            "url": "packages/user-domain"
-        },
-        {
-            "options": {
-                "symlink": true
-            },
-            "type": "path",
-            "url": "packages/user-symfony"
+            "url": "packages/user"
         }
     ],
     "minimum-stability": "dev",
@@ -91,9 +77,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "apps/demo/src/",
-            "Chords\\Core\\Domain\\": "packages/core-domain/src",
-            "Chords\\Core\\Symfony\\": "packages/core-symfony/src",
-            "Chords\\User\\Domain\\": "packages/user-domain/src"
+            "Chords\\Core\\": "packages/core/src",
+            "Chords\\User\\": "packages/user/src"
         }
     },
     "autoload-dev": {
@@ -110,6 +95,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
+            "bundle": "Chords\\User\\UserBundle",
             "require": "7.3.*"
         }
     }
