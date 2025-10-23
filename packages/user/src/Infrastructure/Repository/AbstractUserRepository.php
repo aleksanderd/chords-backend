@@ -9,17 +9,21 @@ use Chords\Core\Infrastructure\ValueObject\EntityId;
 use Chords\User\Domain\Entity\User as DomainUser;
 use Chords\User\Domain\Entity\UserInterface;
 use Chords\User\Domain\ValueObject\Login;
+use Chords\User\Domain\ValueObject\PasswordHash;
 use Chords\User\Infrastructure\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * @extends ServiceEntityRepository<User>
  */
 abstract class AbstractUserRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        protected readonly UserPasswordHasherInterface $passwordHasher,
+    ) {
         parent::__construct($registry, User::class);
     }
 
@@ -28,7 +32,7 @@ abstract class AbstractUserRepository extends ServiceEntityRepository
         return new DomainUser(
             id: new EntityId($user->getId()),
             login: new Login($user->getLogin()),
-            passwordHash: $user->getPasswordHash(),
+            passwordHash: new PasswordHash($user->getPassword()),
             createdAt: \DateTimeImmutable::createFromMutable($user->getCreatedAt()),
             updatedAt: \DateTimeImmutable::createFromMutable($user->getUpdatedAt()),
         );
@@ -36,15 +40,15 @@ abstract class AbstractUserRepository extends ServiceEntityRepository
 
     public function findById(EntityIdInterface $id): ?UserInterface
     {
-        $entity = $this->findOneBy(['id' => $id->toString()]);
+        $user = $this->findOneBy(['id' => $id->toString()]);
 
-        return $entity ? $this->getDomainUser($entity) : null;
+        return $user ? $this->getDomainUser($user) : null;
     }
 
     public function findByLogin(Login $login): ?UserInterface
     {
-        $entity = $this->findOneBy(['login' => $login->getValue()]);
+        $user = $this->findOneBy(['login' => $login->getValue()]);
 
-        return $entity ? $this->getDomainUser($entity) : null;
+        return $user ? $this->getDomainUser($user) : null;
     }
 }

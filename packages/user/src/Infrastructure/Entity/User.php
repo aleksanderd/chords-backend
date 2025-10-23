@@ -7,11 +7,12 @@ namespace Chords\User\Infrastructure\Entity;
 use Chords\Core\Infrastructure\Entity\AbstractEntityWithTimestamps;
 use Chords\User\Domain\ValueObject\Login;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity]
 #[ORM\Table(name: '`user`')]
 #[ORM\UniqueConstraint(name: 'user_login_uniq_idx', columns: ['login'])]
-class User extends AbstractEntityWithTimestamps
+class User extends AbstractEntityWithTimestamps implements PasswordAuthenticatedUserInterface
 {
     #[ORM\Column(type: 'string', length: Login::MAX_LENGTH, unique: true, nullable: false)]
     private string $login;
@@ -19,11 +20,10 @@ class User extends AbstractEntityWithTimestamps
     #[ORM\Column(type: 'string', nullable: false)]
     private string $passwordHash;
 
-    public function __construct(string $login, string $passwordHash)
+    public function __construct(string $login)
     {
         parent::__construct();
         $this->login = $login;
-        $this->passwordHash = $passwordHash;
     }
 
     public function getLogin(): string
@@ -38,12 +38,12 @@ class User extends AbstractEntityWithTimestamps
         return $this;
     }
 
-    public function getPasswordHash(): string
+    public function getPassword(): string
     {
         return $this->passwordHash;
     }
 
-    public function setPasswordHash(string $passwordHash): static
+    public function setPassword(string $passwordHash): static
     {
         $this->passwordHash = $passwordHash;
 

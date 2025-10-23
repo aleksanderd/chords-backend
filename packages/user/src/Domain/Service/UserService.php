@@ -10,8 +10,9 @@ use Chords\User\Domain\Exception\UserDuplicateException;
 use Chords\User\Domain\Exception\UserNotFoundException;
 use Chords\User\Domain\Repository\UserRepositoryInteface;
 use Chords\User\Domain\Repository\UserStorageInteface;
-use Chords\User\Domain\ValueObject\Command\UserUpdate;
 use Chords\User\Domain\ValueObject\Login;
+use Chords\User\Domain\ValueObject\UserCreate;
+use Chords\User\Domain\ValueObject\UserUpdate;
 
 class UserService implements UserServiceInterface
 {
@@ -34,7 +35,7 @@ class UserService implements UserServiceInterface
     public function getById(EntityIdInterface $id): UserInterface
     {
         $user = $this->findById($id);
-        if (!$user) {
+        if (null === $user) {
             throw UserNotFoundException::withId($id);
         }
 
@@ -44,17 +45,26 @@ class UserService implements UserServiceInterface
     public function getByLogin(Login $login): UserInterface
     {
         $user = $this->findByLogin($login);
-        if (!$user) {
+        if (null === $user) {
             throw UserNotFoundException::withLogin($login->getValue());
         }
 
         return $user;
     }
 
+    public function create(UserCreate $data): UserInterface
+    {
+        $user = $this->userStorage->findByLogin($data->login);
+        if (null !== $user) {
+            throw new UserDuplicateException('login', $data->login->getValue());
+        }
+
+        return $this->userStorage->create($data);
+    }
+
     public function changeLogin(EntityIdInterface $id, Login $login): UserInterface
     {
         $user = $this->userStorage->findByLogin($login);
-
         if (null !== $user && !$user->getId()->isEqual($id)) {
             throw new UserDuplicateException('login', $login->getValue());
         }

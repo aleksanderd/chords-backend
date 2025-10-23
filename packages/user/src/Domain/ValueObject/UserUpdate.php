@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chords\User\Domain\ValueObject\Command;
+namespace Chords\User\Domain\ValueObject;
 
 /**
  * Данные для изменения сущности User.
@@ -10,8 +10,8 @@ namespace Chords\User\Domain\ValueObject\Command;
 final readonly class UserUpdate
 {
     public function __construct(
-        public ?string $login = null,
-        public ?string $passwordHash = null,
+        public ?Login $login = null,
+        public ?Password $password = null,
     ) {
     }
 }

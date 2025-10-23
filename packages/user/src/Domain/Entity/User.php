@@ -7,6 +7,7 @@ namespace Chords\User\Domain\Entity;
 use Chords\Core\Domain\Entity\AbstractEntityWithTimestamps;
 use Chords\Core\Domain\ValueObject\EntityIdInterface;
 use Chords\User\Domain\ValueObject\Login;
+use Chords\User\Domain\ValueObject\PasswordHash;
 use DateTimeImmutable;
 
 final readonly class User extends AbstractEntityWithTimestamps implements UserInterface
@@ -16,7 +17,7 @@ final readonly class User extends AbstractEntityWithTimestamps implements UserIn
         DateTimeImmutable $createdAt,
         DateTimeImmutable $updatedAt,
         private Login $login,
-        private string $passwordHash,
+        private PasswordHash $passwordHash,
     ) {
         parent::__construct($id, $createdAt, $updatedAt);
     }
@@ -26,7 +27,7 @@ final readonly class User extends AbstractEntityWithTimestamps implements UserIn
         return $this->login;
     }
 
-    public function getPasswordHash(): string
+    public function getPasswordHash(): PasswordHash
     {
         return $this->passwordHash;
     }
