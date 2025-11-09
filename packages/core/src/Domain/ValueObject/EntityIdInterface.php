@@ -6,8 +6,6 @@ namespace Chords\Core\Domain\ValueObject;
 
 interface EntityIdInterface
 {
-    public static function next(): static;
-
     public static function fromString(string $value): static;
 
     public static function fromBinary(string $value): static;

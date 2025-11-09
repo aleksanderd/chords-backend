@@ -18,11 +18,6 @@ class EntityId implements EntityIdInterface
         return $this->value;
     }
 
-    public static function next(): static
-    {
-        return new static(new UuidV7());
-    }
-
     public static function fromString(string $value): static
     {
         return new static(UuidV7::fromString($value));
