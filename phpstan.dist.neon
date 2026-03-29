@@ -1,0 +1,5 @@
+parameters:
+    level: 6
+    paths:
+        - packages/core/src/
+        - packages/user/src/

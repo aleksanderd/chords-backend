@@ -1,0 +1,20 @@
+{
+    "name": "chords/user",
+    "type": "symfony-bundle",
+    "require": {
+        "chords/core": "@dev",
+        "symfony/http-kernel": "7.3.4",
+        "symfony/dependency-injection": "7.3.4",
+        "php": "^8.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chords\\User\\": "src"
+        }
+    },
+    "extra": {
+        "symfony": {
+            "bundle": "Chords\\User\\UserBundle"
+        }
+    }
+}

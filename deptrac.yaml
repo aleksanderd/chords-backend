@@ -1,0 +1,67 @@
+deptrac:
+    paths:
+        - ./packages
+    exclude_files:
+        - "#.*test.*#"
+    layers:
+        - name: Domain
+          collectors:
+              - type: bool
+                must:
+                    - type: classLike
+                      value: .*Domain.*
+                must_not:
+                    - type: classLike
+                      value: .*Bundle
+                    - type: classLike
+                      value: .*Domain\\Service.*
+                    - type: interface
+                      value: .*Domain\\Repository.*
+
+        - name: DomainService
+          collectors:
+              - type: classLike
+                value: .*Domain\\Service.*
+
+        - name: DomainRepository
+          collectors:
+              - type: interface
+                value: .*Domain\\Repository.*
+
+        - name: Repository
+          collectors:
+              - type: bool
+                must:
+                    - type: classLike
+                      value: .*Repository.*
+                must_not:
+                    - type: classLike
+                      value: .*Domain\\Repository.*
+
+        - name: InterfaceManager
+          collectors:
+              - type: classLike
+                value: .*Interface.*\\Controller.*\\Manager
+
+        - name: InterfaceController
+          collectors:
+              - type: classLike
+                value: .*Interface.*\\Controller.*\\Controller
+
+    ruleset:
+        InterfaceController:
+            - InterfaceManager
+        InterfaceManager:
+            - Domain
+            - DomainService
+        Repository:
+            - Domain
+            - DomainRepository
+            - Repository
+        DomainRepository:
+            - Domain
+            - DomainRepository
+        DomainService:
+            - Domain
+            - DomainRepository
+        Domain:

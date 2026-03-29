@@ -1,0 +1,4 @@
+Chords\User\UserBundle:
+    resource: "@UserBundle/src/Interface/Http/Controller/"
+    type: attribute
+    prefix: /user
